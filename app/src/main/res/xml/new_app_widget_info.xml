@@ -6,6 +6,7 @@
                     android:previewImage="@drawable/zip_tracker_preview"
                     android:initialLayout="@layout/new_app_widget"
                     android:resizeMode="horizontal|vertical"
+                    android:configure="com.puttey.pustikins.ziptracker.Configure"
                     android:widgetCategory="home_screen"
                     android:initialKeyguardLayout="@layout/new_app_widget">
 </appwidget-provider>

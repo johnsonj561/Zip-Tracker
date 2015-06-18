@@ -46,7 +46,7 @@ public class AddressLocation {
                     } else {
                         message.what = 1;
                         Bundle bundle = new Bundle();
-                        result = "Unable to Locate";
+                        result = "???";
                         bundle.putString("address", result);
                         message.setData(bundle);
                     }

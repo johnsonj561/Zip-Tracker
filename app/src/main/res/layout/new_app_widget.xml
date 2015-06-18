@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:text="11111"
+        android:text=" ? "
         android:textColor="@android:color/black"
         android:background="@drawable/widget_background_yellow_xs"
         android:textSize="20sp"

@@ -22,26 +22,33 @@ public class NewAppWidget extends AppWidgetProvider{
     private AddressLocation mAddressLocation;
     private double mLatitude;
     private double mLongitude;
-    private static String mZip = "11111";
+    private static String mZip = "???";
     private RemoteViews remoteViews;
     private ComponentName watchWidget;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         Log.d("Location 1: ", mLatitude + " " + mLongitude);
+        //Attach remoteView
+        remoteViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+        watchWidget = new ComponentName(context, NewAppWidget.class);
 
         //Obtain current location
         mGPSTracker = new GPSTracker(context);
         mLongitude = mGPSTracker.getLongitude();
         mLatitude = mGPSTracker.getLatitude();
         mAddressLocation = new AddressLocation();
-        mAddressLocation.getAddressFromLocation(mLatitude, mLongitude, context, new GeocoderHandler());
-        Log.d("Location 2: ", mLatitude + " " + mLongitude);
-        Log.d("Location 2: mZip = ", mZip);
 
-        //Attach remoteView
-        remoteViews = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-        watchWidget = new ComponentName(context, NewAppWidget.class);
+        for(int i = 0; i < 10; i++){
+            mAddressLocation.getAddressFromLocation(mLatitude, mLongitude, context, new GeocoderHandler());
+           // Log.d("Location " + i, mLatitude + " " + mLongitude);
+           // Log.d("Location " + i + " mZip = ", mZip);
+            //if we've found a good zip, break out of loop
+            if(mZip != null){
+                Log.d("Location Found! mZip = ", mZip);
+                break;
+            }
+        }
 
         //Assign intent to refresh_button - allows user to refresh zip code
         Intent intent = new Intent(context, NewAppWidget.class);
